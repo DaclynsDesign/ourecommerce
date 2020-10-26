@@ -1,0 +1,67 @@
+{%extends 'base.html'%} {%block content%}
+<div class="container" style="margin-top: 150px;">
+  
+  {%if not billing_profile %}
+  <div class="row ">
+    <div class="col-lg-6 col-md-6">
+      {%include 'form.html' with form=login_form next_url=request.build_absolute_uri%}
+    </div>
+    <div class="col-lg-6 col-md-6 text-center">
+      <p>Continue as Guest</p>
+      {%url 'guest_register' as guest_register_url%} 
+      {%include 'form.html' with form=guest_form next_url=request.build_absolute_uri action_url=guest_register_url%}
+    </div>
+  </div>
+
+  {%else%}
+   <!-- shipping -->
+   {%if not object.shipping_address %}
+   <div class="card col-md-10 mx-auto">
+      <article class="card-body">
+        <h4 class="card-title mb-4 mt-1 text-center">Address</h4>
+        <hr>
+      {%url 'checkout_address_create' as checkout_address_create%} 
+      {%include 'address/form.html' with form=address_form next_url=request.build_absolute_uri action_url=checkout_address_create%}
+      </article>
+   </div>
+
+   {%else%}
+
+      <h1>Finalize Checkout</h1>
+      <h4>Order Id: {{ object.order_id }}</h4> 
+      <!-- Shipping address card -->
+      <div>
+         <p>Shipping Address</p>
+         <span>
+            {{object.shipping_address.get_address}}
+         </span>
+      </div>
+      
+      <!-- Cart items -->
+      <div>
+         <p>Items in cart</p>
+         <ul>
+            {%for product in object.cart.products.all %}
+            <li>
+               {{product}}
+            </li>
+            {%endfor%}
+         </ul>
+      </div>
+
+      <!-- Cart card -->
+      <p>Cart total: {{ object.cart.total }}</p>
+
+      <!-- End of cart card -->
+
+      <p>Delivery fee: {{ object.delivery_total }}</p>
+      <p>Order total: {{ object.total }}</p>
+
+      <form action="" method="POST">{%csrf_token%}
+         <button type="submit" class="btn btn-success btn-md">Confirm Checkout</button>
+      </form>
+      
+   {%endif%}
+  {%endif%}
+</div>
+{%endblock%}

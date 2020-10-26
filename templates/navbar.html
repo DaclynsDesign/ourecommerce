@@ -1,0 +1,74 @@
+{%url 'cart:home' as cart_url%}
+{%url 'logout' as logout_url%}
+{%url 'login' as login_url%}
+{%url 'register' as register_url%}
+
+{%load static%}
+<nav class="navbar navbar-top navbar-expand-lg site-navigation position-relative text-center" role="navigation">
+  <section class="header-main" style="background-color: #d3d3d330">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-5-24 col-sm-5 col-4">
+          <div class="brand-wrap">
+            <a href="{%url 'home'%}">
+              <img class="logo" src="{% static 'images/logo.png'%}" />
+            </a>
+          </div>
+          <!-- brand-wrap.// -->
+        </div>
+
+        <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+          <li><a href="#home-section" class="nav-link">Home</a></li>
+          <!--  -->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">Our Designs <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="nav-item {%if request.path == products_list_url%}active{%endif%}">
+                <a class="nav-link" href="{{ products_list_url}}">All Products</a>
+              </li>
+              <li><a href="#Adikra-section" class="nav-link">Adikra Designs</a></li>
+              <li><a href="#FacialDesigns-section" class="nav-link">Facial Designs</a></li>
+              <li><a href="#Painting-section" class="nav-link">Couples Wear</a></li>
+              <li><a href="#Fashionables-section" class="nav-link">Fashionables</a></li>
+            </ul>
+          </li>
+          <!--  -->
+          <li><a href="#about-section" class="nav-link">Customization</a></li>
+          <li><a href="#contact-section" class="nav-link">Contact</a></li>
+
+        </ul>
+        <div class="col-lg-6-24 col-sm-7 col-8  order-2  order-lg-3">
+          <div class="d-flex justify-content-end">
+            <div class="widget-header">
+              {%if user.is_authenticated%}
+              <small class="title text-muted">Welcome {{request.user.email}}</small>
+              <div>
+                <a href="{{logout_url}}">Logout</a>
+              </div>
+              {%else%}
+              <small class="title text-muted">Welcome guest!</small>
+              <div>
+                <a href="{{login_url}}">Sign in</a> <span class="dark-transp"> | </span>
+                <a href="{{register_url}}"> Register</a>
+              </div>
+              {%endif%}
+            </div>
+            <a href="{{cart_url}}" class="widget-header border-left pl-3 ml-3">
+              <div class="icontext">
+                <div class="icon-wrap icon-sm round border">
+                  <i class="fa fa-shopping-cart"></i>
+                </div>
+              </div>
+              <span class="badge badge-pill badge-danger notify navcartcount">{{request.session.cart_items}}</span>
+            </a>
+          </div>
+          <!-- widgets-wrap.// -->
+        </div>
+        <div class="col-lg-13-24 col-sm-12 order-3 order-lg-2">
+          {%include 'searchform.html'%}
+        </div>
+      </div>
+    </div>
+  </section>
+</nav>

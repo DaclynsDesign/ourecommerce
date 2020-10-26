@@ -1,0 +1,12 @@
+<form action="{%url 'search:query'%}" method="GET" class="search-form">
+  <div class="input-group w-100">
+    <input type="text" class="form-control" style="width:60%;" placeholder="Search" name="q" 
+    value="{{request.GET.q}}"/>
+    <div class="input-group-append">
+      <button class="btn btn-primary" type="submit">
+        <!-- <i class="fa fa-search"></i> -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" data-v-7b357a42=""><g fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-miterlimit="10" data-v-7b357a42=""><path d="M16.4 16.7l6.3 6.5" data-v-7b357a42=""></path><ellipse cx="10.5" cy="9.8" rx="9.2" ry="9.1" data-v-7b357a42=""></ellipse></g></svg>
+      </button>
+    </div>
+  </div>
+</form>

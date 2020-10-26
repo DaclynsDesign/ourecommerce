@@ -1,0 +1,26 @@
+{% extends 'base.html'%} {% load crispy_forms_tags %}
+
+{%block content%}
+<div class="container" style="margin-top: 200px;margin-bottom: 200px;">
+  <div class="card mx-auto col-md-8 col-lg-8">
+    <article class="card-body mx-auto" style="max-width: 400px;">
+      <h4 class="card-title mt-3 text-center">Create Account</h4>
+      <p class="text-center">Get started with your free account</p>
+    <hr>
+      <form method="POST"> {%csrf_token%}
+        {{ form | crispy }}
+        <!-- form-group// -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">
+            Create Account
+          </button>
+        </div>
+        <!-- form-group// -->
+        <p class="text-center">Have an account? 
+            <a href="{%url 'login'%}">Log In</a>
+        </p>
+      </form>
+    </article>
+  </div>
+</div>
+{%endblock%}

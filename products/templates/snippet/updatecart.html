@@ -1,0 +1,28 @@
+<form
+  class="addtoCart"
+  action="{%url 'cart:update'%}"
+  data-endpoint='{%url "cart:update"%}'
+  method="POST"
+  style="display: inline-block"
+>
+  {%csrf_token%}
+  <input type="hidden" name="product_id" value="{{ product.id }}" />
+  <!-- We going to use a javascript ajax to change if product is 
+    added or not
+  -->
+  <span class="submit-span">
+    {% if product in cart.products.all %}
+    <button class="btn btn-md  btn-outline-danger" type="submit">
+      × Remove
+    </button>
+    <!-- <a  class="btn btn-red mr-1 rounded-0" type="submit">Remove</a> -->
+
+    {%else%}
+    <button class="btn btn-md  btn-outline-primary" type="submit">
+      <i class="fa fa-shopping-cart"></i>
+    </button>
+    <!-- <a class="btn btn-black mr-1 rounded-0" type="submit">Add to Cart</a> -->
+
+    {%endif%}
+  </span>
+</form>

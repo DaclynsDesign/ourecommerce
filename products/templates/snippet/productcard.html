@@ -1,0 +1,19 @@
+		<div class="product-item">
+		  <figure>
+			<img src="{{ product.image.url }}" alt="Image" class="img-fluid">
+		  </figure>
+		  <div class="px-4">
+			<h3><a href="{{product.get_absolute_url}}">{{product.title}}</a></h3>
+			<!-- <p class="mb-4">Available in all sizes and different colours.</p> -->
+			<div>
+			  <div class="mb-4">
+
+				<div class="price">GHC{{ product.price }}</div>
+			  </div>
+			  <!-- <a href="#" class="btn btn-black mr-1 rounded-0">Add to Cart</a> -->
+			  {%include 'snippet/updatecart.html' with product=product cart=cart%}
+			  <a href="{{ product.get_absolute_url }}" class="btn btn-black btn-outline-black ml-1 rounded-0">Details</a>
+			</div>
+		  </div>
+		</div>
+	

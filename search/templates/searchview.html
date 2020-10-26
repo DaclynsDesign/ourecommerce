@@ -1,0 +1,21 @@
+{%extends 'base.html'%} {%block content%}
+<section class="section-pagetop bg-secondary p-1" style="margin-top: 160px;margin-bottom: 200px;">
+  <div class="container clearfix">
+    {% if request.GET.q%}
+    <p class="title-page text-white m-0">Search Results for {{ request.GET.q }}</p>
+    {%else%}
+    <p class="title-page text-white m-0">No Search Results</p>
+    {%endif%}
+  </div>
+</section>
+
+<div class="container pt-3">
+  <div class="row">
+    {%for product in object_list%}
+    <div class="col-lg-4 col-md-6 mb-5">
+      {%include 'snippet/productcard.html' with product=product%}
+    </div>
+    {%endfor%}
+  </div>
+</div>
+{%endblock%}
